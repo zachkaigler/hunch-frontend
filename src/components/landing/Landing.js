@@ -7,6 +7,7 @@ import { Link } from 'react-scroll'
 
 const features = featureData.map((feature) => {
    return <LandingFeature 
+            key={feature.id}
             id={feature.id}
             img={feature.image}
             header={feature.header}
