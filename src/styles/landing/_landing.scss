@@ -1,0 +1,187 @@
+@import '../utilities/variables';
+@import './landing-feature';
+
+.landing {
+    width: 100%;
+    overflow-x: hidden;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
+    .landing-bg {
+        grid-area: 1 / 1 / 2 / 2;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+    
+        .column-1 {
+            background-color: $color-1;
+            width: 17%;
+            height: 100%;
+        }
+    
+        .column-2 {
+            background-color: $color-2;
+            width: 17%;
+            height: 100%;
+        }
+    
+        .column-3 {
+            background-color: $color-3;
+            width: 17%;
+            height: 100%;
+        }
+    
+        .column-4 {
+            background-color: $color-4;
+            width: 17%;
+            height: 100%;
+        }
+    
+        .column-5 {
+            background-color: $color-5;
+            width: 17%;
+            height: 100%;
+        }
+    
+        .column-6 {
+            background-color: $color-6;
+            width: 17%;
+            height: 100%;
+        }
+    }
+
+    .content {
+        grid-area: 1 / 1 / 2 / 2;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        @media (min-device-width: 320px) and (max-device-width: 480px) {
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        .landing-main {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+
+            .heading-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+
+                img {
+                    width: 80%;
+                }
+    
+                .landing-header {
+                    color: $offwhite;
+                    text-align: center;
+                }
+            }
+            
+
+            .landing-learn-more {
+                background-color: $color-1;
+                padding: 1rem;
+                border-radius: 5px;
+                cursor: pointer;
+                @include bg-color-transition();
+
+                &:hover {
+                    background-color: $color-1-dark;
+                }
+
+                p {
+                    color: $offwhite;
+                    text-align: center;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 100vh;
+
+            .landing-sign-up-mobile {
+                height: 20vh;
+                width: 100%;
+                display: flex;
+
+                justify-content: center;
+                align-items: center;
+
+                @media (min-device-width: 1367px) {
+                    display: none;
+                }
+
+                h1 {
+                    color: $offwhite;
+                    text-shadow: 0 0 30px rgb(109, 109, 109), 2px 2px 2px rgba(255,255,255,0);
+                    cursor: pointer;
+                    transition: font-size 600ms ease-in-out;
+    
+                    &:hover {
+                        font-size: 3.2rem;
+                    }
+    
+                    @media (min-device-width: 320px) and (max-device-width: 480px) {
+                        transition: none;
+    
+                        &:hover {
+                            font-size: 1.8rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        .landing-sign-up-desktop {
+            height: 30rem;
+            width: 100%;
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            @media (min-device-width: 320px) and (max-device-width: 480px) {
+                display: none;
+            }
+
+            h1 {
+                color: $offwhite;
+                text-shadow: 0 0 30px rgb(109, 109, 109), 2px 2px 2px rgba(255,255,255,0);
+                cursor: pointer;
+                transition: font-size 600ms ease-in-out;
+
+                &:hover {
+                    font-size: 3.2rem;
+                }
+
+                @media (min-device-width: 320px) and (max-device-width: 480px) {
+                    transition: none;
+
+                    &:hover {
+                        font-size: 1.8rem;
+                    }
+                }
+            }
+        }
+    }
+}

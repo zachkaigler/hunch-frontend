@@ -1,0 +1,24 @@
+@mixin drop-shadow {
+    -webkit-box-shadow: 0px 11px 16px 2px rgba(0, 0, 0, 0.208); 
+    box-shadow: 0px 11px 16px 2px rgba(0,0,0,0.208);
+}
+
+@mixin bg-color-transition {
+    transition: background-color 200ms ease-in-out;
+}
+
+@mixin color-transition {
+    transition: color 200ms ease-in-out;
+}
+
+$color-1: #244965;
+$color-1-dark: #20415b;
+$color-2: #d8cac0;
+$color-3: #bcc8ab;
+$color-4: #86aa77;
+$color-5: #e05353;
+$color-6: #692d3b;
+
+$offwhite: #f8f8f8;
+$grey: #d3d3d3;
+$grey-dark: #c5c5c5;

@@ -1,0 +1,57 @@
+@import '../utilities/variables';
+
+.landing-feature {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: $grey;
+    width: 100%;
+    height: 15rem;
+    padding: 1rem 0 1rem 0;
+    margin: 1rem 0 1rem 0;
+    border-top: 5px solid $offwhite;
+    border-bottom: 5px solid $offwhite;
+    @include drop-shadow();
+    @include bg-color-transition();
+
+    &:hover {
+        background-color: $grey-dark;
+    }
+
+    @media (min-device-width: 320px) and (max-device-width: 480px) {
+        height: 8rem;
+        padding: 1rem 0 1rem 0;
+        margin: .5rem 0 .5rem 0;
+    }
+
+    h1 {
+        color: $color-1;
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        color: $color-5
+    }
+
+    img {
+        height: 13rem;
+
+        @media (min-device-width: 320px) and (max-device-width: 480px) {
+            height: 80%;
+        }
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: 30%;
+        margin-left: 1rem;
+
+        @media (min-device-width: 320px) and (max-device-width: 480px) {
+            width: 40%;
+        }
+    }
+}
