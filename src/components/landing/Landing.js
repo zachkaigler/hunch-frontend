@@ -1,6 +1,5 @@
 import React from 'react'
 import logo from '../../images/hunch-logo-full.png'
-import Header from '../header/Header'
 import { featureData } from './featureData'
 import LandingFeature from './LandingFeature'
 import { Link } from 'react-scroll'
@@ -26,7 +25,9 @@ const Landing = () => {
                 <div className="column-5"/>
                 <div className="column-6"/>
             </div>
-            <Header />
+            <div className="header">
+                <p>Log In | Sign Up</p>
+            </div>
             <div className="content">
                 <div className="landing-main">
                     <div className="heading-container">
