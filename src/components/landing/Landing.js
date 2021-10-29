@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import logo from '../../images/hunch-logo-full.png'
 import { featureData } from './featureData'
 import LandingFeature from './LandingFeature'
@@ -15,6 +15,17 @@ const features = featureData.map((feature) => {
 })
 
 const Landing = () => {
+    const [wasTriggered, setWasTriggered] = useState(false)
+
+    useEffect(() => {
+        const mainObserver = new IntersectionObserver(function(entries) {
+            if(entries[0].isIntersecting === true)
+            setWasTriggered(true)
+          }, { threshold: [.25] });
+          
+          mainObserver.observe(document.querySelector("div.features-list"));
+    }, [])
+
     return (
         <section className="landing">
             <div className="landing-bg">
@@ -40,7 +51,7 @@ const Landing = () => {
                         </div>
                     </Link>
                 </div>    
-                <div className="features-list">
+                <div className={`features-list ${wasTriggered ? "vivify fadeInLeft" : "hidden"}`}>
                     {features}
                     <div className="landing-sign-up-mobile">
                         <h1>try it for free</h1>

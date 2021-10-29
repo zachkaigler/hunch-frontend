@@ -1,0 +1,55 @@
+@import '../utilities/variables';
+
+.hunch-button {
+    width: 7rem;
+    height: 3rem;
+    padding: 1rem;
+    border-radius: 5px;
+    border: solid 2px;
+    margin: 0 .5rem 0 .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    @include drop-shadow();
+
+    @media (min-device-width: 320px) and (max-device-width: 480px) {
+        width: 4rem;
+        height: 1.5rem;
+        font-size: .8rem;
+    }
+
+    &.red {
+        color: $color-6;
+        border-color: $color-6;
+        background-color: $color-5;
+
+        &:hover {
+            background-color: $color-5-dark;
+        }
+    }
+
+    &.green {
+        color: $color-4;
+        border-color: $color-4;
+        background-color: $color-3;
+
+        &:hover {
+            background-color: $color-3-dark;
+        }
+    }
+
+    &.grey {
+        color: $grey-dark;
+        border-color: $grey-dark;
+        background-color: $grey-light;
+    }
+
+    &:hover {
+        background-color: $offwhite;
+    }
+}

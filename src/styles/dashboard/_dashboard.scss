@@ -1,7 +1,7 @@
 @import '../utilities/variables';
 @import './dashboard-tile';
 
-.dashboard {
+.main {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -13,16 +13,24 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        min-height: 32rem;
+
+        @media (min-device-width: 320px) and (max-device-width: 480px) {
+            min-height: 27rem;
+        }
 
         h1 {
             color: $color-1;
             margin-bottom: 1rem;
+
+            @media (min-device-width: 320px) and (max-device-width: 480px) {
+                margin-bottom: 0;
+            }
         }
 
         .tile-container {
             border-top: 2px solid $color-1;
             background-color: $grey-light;
-            min-height: 30rem;
             padding: 3rem 0 3rem 0;
             display: flex;
             flex-direction: row;

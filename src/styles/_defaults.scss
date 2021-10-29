@@ -34,8 +34,18 @@ p {
     @media (min-device-width: 320px) and (max-device-width: 480px) {
         font-size: .8rem;
     }
+
+    &.error {
+        color: $color-5;
+        font-size: 1rem;
+    }
 }
 
 span.nav-menu-item {
     color: $color-1
+}
+
+.error-container {
+    margin: -5rem 0 -5rem 0;
+    min-height: 1.5rem;
 }

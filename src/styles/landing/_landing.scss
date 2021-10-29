@@ -136,6 +136,10 @@
             align-items: center;
             width: 100%;
             min-height: 100vh;
+            
+            &.hidden {
+                visibility: hidden;
+            }
 
             .landing-sign-up-mobile {
                 height: 20vh;

@@ -10,11 +10,12 @@ const Dashboard = () => {
                 color={tile.color}
                 label={tile.label}
                 icon={tile.icon}
+                destination={tile.destination}
               />
     })
 
     return (
-        <div className="dashboard">
+        <div className="main">
             <div className="content">
                 <h1>Dashboard</h1>
                 <div className="tile-container">

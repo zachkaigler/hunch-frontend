@@ -11,8 +11,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     @include drop-shadow();
     @include bg-color-transition();
+
+    @media (min-device-width: 320px) and (max-device-width: 480px) {
+        width: 15rem;
+        height: 15rem;
+    }
 
     &:hover {
         background-color: $offwhite;
@@ -27,14 +33,34 @@
         }
     }
 
+    p {
+        font-size: 1rem;
+        text-align: center;
+        width: 60%;
+        margin: -1.5rem 0 2rem 0;
+
+        @media (min-device-width: 320px) and (max-device-width: 480px) {
+            width: 80%;
+            margin: -1.5rem 0 1.5rem 0;
+        }
+    }
+
     img {
         height: 8rem;
+
+        @media (min-device-width: 320px) and (max-device-width: 480px) {
+            height: 6rem;
+        }
     }
 
     &.color-1 {
         border-color: $color-1;
 
         h2 {
+            color: $color-1
+        }
+
+        p {
             color: $color-1
         }
     }
@@ -45,12 +71,20 @@
         h2 {
             color: $color-2
         }
+
+        p {
+            color: $color-2
+        }
     }
 
     &.color-3 {
         border-color: $color-3;
 
         h2 {
+            color: $color-3
+        }
+
+        p {
             color: $color-3
         }
     }
@@ -61,12 +95,20 @@
         h2 {
             color: $color-4
         }
+
+        p {
+            color: $color-4
+        }
     }
 
     &.color-5 {
         border-color: $color-5;
 
         h2 {
+            color: $color-5
+        }
+
+        p {
             color: $color-5
         }
     }
@@ -76,6 +118,22 @@
 
         h2 {
             color: $color-6
+        }
+
+        p {
+            color: $color-6
+        }
+    }
+
+    &.grey {
+        border-color: $grey;
+
+        h2 {
+            color: $grey
+        }
+
+        p {
+            color: $grey
         }
     }
 }

@@ -1,0 +1,30 @@
+.content {
+    &.create-survey {
+        margin-top: 3rem;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (min-device-width: 320px) and (max-device-width: 480px) {
+            margin-top: 0rem;
+        }
+
+        .tile-container {
+            border-top: none;
+            background-color: transparent;
+            padding: 0 0 0 0;
+        }
+        
+        .create-survey-button-container {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+
+            .buttons-right {
+                display: flex;
+                flex-direction: row;
+            }
+        }
+    }
+}

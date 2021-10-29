@@ -3,11 +3,12 @@ import Landing from "./landing/Landing";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Dashboard from "./dashboard/Dashboard";
 import Nav from "./nav/Nav";
+import CreateSurvey from "./create-survey/CreateSurvey";
 
 function App() {
   // Set to null to go to landing page
   // TODO: Replace with actual user functionality
-  let user = null
+  let user = {}
 
   return (
     <div className="App">
@@ -19,6 +20,9 @@ function App() {
           </Route>
           <Route exact path="/dashboard">
             { user ? <Dashboard /> : <Redirect to="/" /> }
+          </Route>
+          <Route exact path="/create">
+            { user ? <CreateSurvey /> : <Redirect to="/" /> }
           </Route>
         </Switch>
       </div>

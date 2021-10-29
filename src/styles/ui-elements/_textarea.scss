@@ -1,0 +1,23 @@
+@import '../utilities/variables';
+
+.hunch-textarea {
+    width: 60%;
+    height: 13rem;
+    border-radius: 10px;
+    border: 1px solid $grey;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    padding: 1rem;
+    outline: none;
+    resize: none;
+    @include drop-shadow();
+
+    &.error {
+        border-color: $color-5;
+    }
+
+    @media (min-device-width: 320px) and (max-device-width: 480px) {
+        width: 90%;
+        height: 8rem;
+    }
+}
