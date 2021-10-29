@@ -7,7 +7,7 @@ import Nav from "./nav/Nav";
 function App() {
   // Set to null to go to landing page
   // TODO: Replace with actual user functionality
-  let user = {}
+  let user = null
 
   return (
     <div className="App">

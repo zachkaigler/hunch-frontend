@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import logo from '../../images/hunch-logo-full.png'
 import { featureData } from './featureData'
 import LandingFeature from './LandingFeature'
 import { Link } from 'react-scroll'
+import { useSpring, animated } from 'react-spring'
 
 const features = featureData.map((feature) => {
    return <LandingFeature 
@@ -12,9 +13,28 @@ const features = featureData.map((feature) => {
             header={feature.header}
             blurb={feature.blurb}
          />
-}) 
+})
 
 const Landing = () => {
+    const [renderState, setRenderState] = useState(false)
+
+    useEffect(() => {
+        const Observer = new IntersectionObserver(function(entries) {
+          if(entries[0].isIntersecting === true)
+          setRenderState(true)
+        }, { threshold: [.25] });
+        
+        Observer.observe(document.querySelector("div.features-list"));
+    }, [])
+
+    const styles = useSpring({ 
+        config: {
+            duration: 400
+        },
+        opacity: renderState ? 1 : 0,
+        filter: renderState ? `blur(0px)` : `blur(5px)`
+    })
+
     return (
         <section className="landing">
             <div className="landing-bg">
@@ -40,12 +60,12 @@ const Landing = () => {
                         </div>
                     </Link>
                 </div>    
-                <div className="features-list">
-                    {features}
+                <animated.div style={styles} className="features-list">
+                    { renderState ? features : null }
                     <div className="landing-sign-up-mobile">
                         <h1>try it for free</h1>
                     </div>
-                </div>
+                </animated.div>
                 <div className="landing-sign-up-desktop">
                     <h1>try it for free</h1>
                 </div>

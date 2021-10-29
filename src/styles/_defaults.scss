@@ -1,3 +1,5 @@
+@import "./utilities/variables";
+
 .App {
     display: flex;
     flex-direction: column;
@@ -32,4 +34,8 @@ p {
     @media (min-device-width: 320px) and (max-device-width: 480px) {
         font-size: .8rem;
     }
+}
+
+span.nav-menu-item {
+    color: $color-1
 }
