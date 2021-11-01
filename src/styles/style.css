@@ -111,8 +111,24 @@ span.nav-menu-item {
 }
 
 .error-container {
-  margin: -5rem 0 -5rem 0;
   min-height: 1.5rem;
+}
+
+.fluid-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .hunch-button {
@@ -223,11 +239,48 @@ span.nav-menu-item {
   border-color: #e05353;
 }
 
+.hunch-textarea.question {
+  height: 8rem;
+}
+
 @media (min-device-width: 320px) and (max-device-width: 480px) {
   .hunch-textarea {
     width: 90%;
     height: 8rem;
   }
+}
+
+.section-header {
+  width: 75%;
+  height: 1rem;
+  background-color: #d8cac0;
+  margin: 1.5rem 0 1rem 0;
+  padding: .5rem .5rem .5rem .5rem;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-shadow: 0px 11px 16px 2px rgba(0, 0, 0, 0.208);
+  box-shadow: 0px 11px 16px 2px rgba(0, 0, 0, 0.208);
+}
+
+@media (min-device-width: 320px) and (max-device-width: 480px) {
+  .section-header {
+    width: 100%;
+  }
+}
+
+.section-header p {
+  color: #244965;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 .nav {
@@ -850,7 +903,7 @@ span.nav-menu-item {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  min-height: 32rem;
+  min-height: 34rem;
 }
 
 @media (min-device-width: 320px) and (max-device-width: 480px) {
@@ -914,6 +967,28 @@ span.nav-menu-item {
   border-top: none;
   background-color: transparent;
   padding: 0 0 0 0;
+}
+
+.content.create-survey .inner-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.content.create-survey .inner-container .answers-container {
+  min-height: 5rem;
+  margin-top: 2.5rem;
 }
 
 .content.create-survey .create-survey-button-container {

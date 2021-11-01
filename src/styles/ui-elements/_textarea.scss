@@ -16,6 +16,10 @@
         border-color: $color-5;
     }
 
+    &.question {
+        height: 8rem;
+    }
+
     @media (min-device-width: 320px) and (max-device-width: 480px) {
         width: 90%;
         height: 8rem;
