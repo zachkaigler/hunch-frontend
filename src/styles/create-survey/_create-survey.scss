@@ -1,3 +1,5 @@
+@import './answer-option-card';
+
 .content {
     &.create-survey {
         margin-top: 3rem;
@@ -21,19 +23,38 @@
             justify-content: center;
             align-items: center;
 
+            .add-answer {
+                padding-right: 20%;
+                align-self: flex-end;
+                color: $color-1;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                margin: 1rem 0 1rem 0;
+                
+                span {
+                    cursor: pointer;
+                }
+            }
+
             .answers-container {
-                min-height: 5rem;
-                margin-top: 2.5rem;
+                width: 100%;
+                height: 10rem;
+                margin-top: .25rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                overflow: scroll;
+                overflow-x: hidden;
+                overflow-y: auto;
             }
         }
-
         
         .create-survey-button-container {
             display: flex;
             width: 100%;
             flex-direction: row;
             justify-content: space-between;
-            margin-bottom: 2rem;
+            margin: 2rem 0 2rem 0;
 
             .buttons-right {
                 display: flex;

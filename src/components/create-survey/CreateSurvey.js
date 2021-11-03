@@ -6,6 +6,8 @@ import Input from '../ui-elements/Input'
 import SectionHeader from '../ui-elements/SectionHeader'
 import TextArea from '../ui-elements/TextArea'
 import { Radio, RadioGroup, FormControl, FormControlLabel } from '@mui/material'
+import AnswerOptionCard from './AnswerOptionCard'
+import { v4 as uuidv4 } from 'uuid';
 
 const CreateSurvey = () => {
     const history = useHistory()
@@ -26,6 +28,7 @@ const CreateSurvey = () => {
     const [questionPrompt, setQuestionPrompt] = useState("")
     const [questionAnswerOpts, setQuestionAnswerOpts] = useState([])
     const [answerLabel, setAnswerLabel] = useState("")
+    const [goodbyeMsg, setGoodbyeMsg] = useState("")
 
     const [addAnother, setAddAnother] = useState("yes")
 
@@ -34,14 +37,18 @@ const CreateSurvey = () => {
         name: surveyName,
         desc: surveyDesc,
         questions: allQuestions,
+        goodbyeMsg: goodbyeMsg
     }
 
-    console.log("Current survey state: ", survey)
-    console.log("currentQuestion: ", currentQuestion)
-    console.log("allQuestions: ", allQuestions)
-    console.log("questionType: ", questionType)
-    console.log("questionPrompt: ", questionPrompt)
-    console.log("questionAnswerOpts: ", questionAnswerOpts)
+    const answerOptCards = questionAnswerOpts.map(opt => {
+        return <AnswerOptionCard
+                key={opt.id}
+                id={opt.id}
+                label={opt.label}
+                setQuestionAnswerOpts={setQuestionAnswerOpts}
+                questionAnswerOpts={questionAnswerOpts}
+              />
+    })
 
     const pages = {
         surveyType:
@@ -120,7 +127,7 @@ const CreateSurvey = () => {
                                 value={questionPrompt}
                                 setter={setQuestionPrompt}
                                 maxLength={250}
-                                error={error} 
+                                error={error}
                                 questionPrompt={true}
                             />
                         </div>
@@ -136,20 +143,37 @@ const CreateSurvey = () => {
                         <h1>Question {currentQuestion}</h1>
                         <div className="inner-container">
                             <SectionHeader text="Answer options"/>
-                            <TextArea 
+                            <Input 
                                 value={answerLabel}
                                 setter={setAnswerLabel}
-                                maxLength={250}
+                                maxLength={100}
                                 error={error}
                                 questionPrompt={true}
+                                keyDownEnter={true}
                             />
+                            {/* TODO: add this functionality to input on enter keystroke*/}
+                            <div className="add-answer">
+                                <span onClick={() => {
+                                    if (answerLabel === "") {
+                                        setError("Answer labels cannot be blank.")
+                                    } else {
+                                        setError("")
+                                        setQuestionAnswerOpts([...questionAnswerOpts, {
+                                            id: uuidv4(),
+                                            question_id: currentQuestion,
+                                            label: answerLabel
+                                        }])
+                                        setAnswerLabel("")
+                                    }
+                                }}>Add</span>
+                            </div>
                             <div className="answers-container">
-                                <p>test</p>
+                                {answerOptCards}
                             </div>
                         </div>
                     </>,
                     prevPg: "createQuestion",
-                    nextPg: currentQuestion < allQuestions.length ? "createQuestion" : "addAnotherQuestion",
+                    nextPg: (currentQuestion < allQuestions.length) && (questionType !== "multiChoice1" || questionType !== "multiChoice2") ? "createQuestion" : "addAnotherQuestion",
                     state: answerLabel
             },
         addAnotherQuestion:
@@ -171,6 +195,22 @@ const CreateSurvey = () => {
                 prevPg: "createQuestion",
                 nextPg: addAnother === "yes" ? "createQuestion" : "createGoodbye",
                 state: addAnother
+           },
+        createGoodbye:
+           {
+            content:
+            <>
+                <h1>Write a thank you message</h1>
+                <TextArea 
+                    value={goodbyeMsg}
+                    setter={setGoodbyeMsg}
+                    maxLength={500}
+                    error={error}
+                />
+            </>,
+        prevPg: "addAnotherQuestion",
+        nextPg: null,
+        state: addAnother
            }
     }
 
@@ -183,7 +223,9 @@ const CreateSurvey = () => {
             case "createQuestion":
                 return "Questions must have a prompt."
             case "createAnswerOpts":
-                return "Answer options must have a label."
+                return "Multiple choice questions must have at least two answers."
+            case "goodbyeMsg":
+                return "Please write a thank you message."
             default:
                 return null
         }
@@ -216,7 +258,8 @@ const CreateSurvey = () => {
                                         // if we click previous on create question page any time after the first question, or if we're on the add another question page
                                         // after the first question and click previous, we decriment the currentQuestion by 1 and find the values for each part of the previous
                                         // question to update into state and rerender createQuestion with those values
-                                        if ((currentPage === "createQuestion" && currentQuestion > 1) || (currentPage === "addAnotherQuestion" && currentQuestion > 1)) {
+                                        if (currentPage === "createQuestion" && currentQuestion > 1) {
+                                            setError(null)
                                             setCurrentQuestion(currentQuestion - 1)
                                             setQuestionType(allQuestions.find((q) => q.id === currentQuestion - 1).type)
                                             setQuestionPrompt(allQuestions.find((q) => q.id === currentQuestion - 1).prompt)
@@ -224,63 +267,71 @@ const CreateSurvey = () => {
                                             setCurrentPage("createQuestion")
                                         } else {
                                             // otherwise we just go to whatever the previous page is supposed to be
+                                            setError(null)
                                             setCurrentPage(pages[currentPage].prevPg)
                                         }
                                     }}
                                 />
                                 {/* "next" button functionality */}
                                 <Button 
-                                    content="Next"
+                                    content={ currentPage === "createGoodbye" ? "Finish" : "Next"}
                                     color="green"
                                     handleClick={() => {
-                                        if (pages[currentPage].state === "") {
-                                            // Error handling
-                                            setError(parseError(currentPage))
+                                        if (currentPage === "createGoodbye") {
+                                            // TODO: add post to database, push to survey's page
+                                            console.log("Submitted survey: ", survey)
+                                            history.push("/dashboard")
                                         } else {
-                                            setError(null)
-                                            
-                                            // If the current question number matches an ID of a question already added to survey,
-                                            // update that question
-                                            if (allQuestions.length !== 0 && allQuestions.find((q) => q.id === currentQuestion)) {
-                                                setAllQuestions(allQuestions.map(q => {
-                                                    if (q.id === currentQuestion) {
-                                                        return {
-                                                            id: currentQuestion,
-                                                            type: questionType,
-                                                            prompt: questionPrompt,
-                                                            answers: questionAnswerOpts
-                                                        }
-                                                    } else {
-                                                        return q
-                                                    }
-                                                }))
-                                            // otherwise, add a new question to the end of the array
+                                            if ((currentPage !== "createAnswerOpts" && pages[currentPage].state === "") || (currentPage === "createAnswerOpts" && questionAnswerOpts.length < 2)) {
+                                                // Error handling
+                                                setError(parseError(currentPage))
                                             } else {
-                                                setAllQuestions([...allQuestions, {
-                                                    id: currentQuestion,
-                                                    type: questionType,
-                                                    prompt: questionPrompt,
-                                                    answers: questionAnswerOpts
-                                                }])
-                                            }
-                                            
-                                            // Increment question counter and reset fields if we're adding another question
-                                            if (currentPage === "addAnotherQuestion" && addAnother === "yes") {
-                                                setCurrentQuestion(currentQuestion + 1)
-                                                setQuestionType("multiChoice1")
-                                                setQuestionPrompt("")
-                                                setQuestionAnswerOpts([])
-                                            // or if we're currently creating answer options and we're not on the last created question,
-                                            // increment the question by 1 and then find that question's values
-                                            } else if (currentPage === "createAnswerOpts" && currentQuestion < allQuestions.length) {
-                                                setCurrentQuestion(currentQuestion + 1)
-                                                setQuestionType(allQuestions.find((q) => q.id === currentQuestion + 1).type)
-                                                setQuestionPrompt(allQuestions.find((q) => q.id === currentQuestion + 1).prompt)
-                                                setQuestionAnswerOpts(allQuestions.find((q) => q.id === currentQuestion + 1).answers)
-                                            }
+                                                setError(null)
+                                                
+                                                // If the current question number matches an ID of a question already added to survey,
+                                                // update that question
+                                                if (allQuestions.length !== 0 && allQuestions.find((q) => q.id === currentQuestion)) {
+                                                    setAllQuestions(allQuestions.map(q => {
+                                                        if (q.id === currentQuestion) {
+                                                            return {
+                                                                id: currentQuestion,
+                                                                type: questionType,
+                                                                prompt: questionPrompt,
+                                                                answers: questionAnswerOpts
+                                                            }
+                                                        } else {
+                                                            return q
+                                                        }
+                                                    }))
+                                                // otherwise, add a new question to the end of the array
+                                                } else {
+                                                    setAllQuestions([...allQuestions, {
+                                                        id: currentQuestion,
+                                                        type: questionType,
+                                                        prompt: questionPrompt,
+                                                        answers: questionAnswerOpts
+                                                    }])
+                                                }
+                                                
+                                                // Increment question counter and reset fields if we're adding another question
+                                                if (currentPage === "addAnotherQuestion" && addAnother === "yes") {
+                                                    setCurrentQuestion(currentQuestion + 1)
+                                                    setQuestionType("multiChoice1")
+                                                    setQuestionPrompt("")
+                                                    setQuestionAnswerOpts([])
+                                                // or if we're currently creating answer options and we're not on the last created question,
+                                                // increment the question by 1 and then find that question's values
+                                                } else if ((currentPage === "createAnswerOpts" || currentPage === "createQuestion") && currentQuestion < allQuestions.length) {
+                                                    setCurrentQuestion(currentQuestion + 1)
+                                                    setQuestionType(allQuestions.find((q) => q.id === currentQuestion + 1).type)
+                                                    setQuestionPrompt(allQuestions.find((q) => q.id === currentQuestion + 1).prompt)
+                                                    setQuestionAnswerOpts(allQuestions.find((q) => q.id === currentQuestion + 1).answers)
+                                                } 
 
-                                            // Trigger next page
-                                            setCurrentPage(pages[currentPage].nextPg)
+                                                // Trigger next page
+                                                setAnswerLabel("")
+                                                setCurrentPage(pages[currentPage].nextPg)
+                                            }
                                         }
                                     }}
                                 />
