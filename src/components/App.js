@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Dashboard from "./dashboard/Dashboard";
 import Nav from "./nav/Nav";
 import CreateSurvey from "./create-survey/CreateSurvey";
+import SurveyDetails from "./survey-details/SurveyDetails";
 
 function App() {
   // Set to null to go to landing page
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route exact path="/create">
             { user ? <CreateSurvey /> : <Redirect to="/" /> }
+          </Route>
+          <Route exact path="/survey/details/:id">
+            { user ? <SurveyDetails /> : <Redirect to="/" /> }
           </Route>
         </Switch>
       </div>

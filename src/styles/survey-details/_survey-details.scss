@@ -1,0 +1,42 @@
+@import '../utilities/variables';
+
+.content {
+    &.survey-details {
+        justify-content: flex-start;
+    }
+
+    .toolbar {
+        align-self: center;
+    }
+
+    .survey-details-content {
+        display: flex;
+        align-self: center;
+        flex-direction: row-reverse;
+
+        .stats {
+            background-color: $offwhite;
+            border: 2px solid $color-1;
+            border-radius: 5px;
+            min-width: 20rem;
+            padding: 1rem;
+            margin: 1rem;
+
+            h2 {
+                text-align: center;
+                color: $color-1;
+                margin-bottom: 1.5rem;
+            }
+
+            p {
+                color: $color-1;
+                font-size: 1rem;
+                margin: 1.5rem 0rem 1.5rem 0rem;
+            }
+
+            span {
+                font-weight: bold;
+            }
+        }
+    }
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import logo from '../../images/hunch-logo.png'
 import NavMenu from './NavMenu'
 // import profileIcon from '../../images/icon-profile.png'
@@ -6,7 +7,7 @@ import NavMenu from './NavMenu'
 const Nav = () => {
     return (
         <div className="nav">
-            <img src={logo} alt="hunch-logo" id="nav-logo"/>
+            <Link to="/dashboard"><img src={logo} alt="hunch-logo" id="nav-logo"/></Link>
             <div className="nav-right">
                 <h2>username</h2>
                 <NavMenu />

@@ -132,6 +132,10 @@ span.nav-menu-item {
           align-items: center;
 }
 
+.line {
+  border-bottom: 2px solid #244965;
+}
+
 .hunch-button {
   width: 7rem;
   height: 3rem;
@@ -284,6 +288,41 @@ span.nav-menu-item {
   font-size: 1rem;
 }
 
+.toolbar {
+  width: 55%;
+  min-width: 25rem;
+  max-width: 35rem;
+  height: 1rem;
+  background-color: #d8cac0;
+  margin: 1.5rem 0 1rem 0;
+  padding: .5rem .5rem .5rem .5rem;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-shadow: 0px 11px 16px 2px rgba(0, 0, 0, 0.208);
+  box-shadow: 0px 11px 16px 2px rgba(0, 0, 0, 0.208);
+}
+
+@media (min-device-width: 320px) and (max-device-width: 480px) {
+  .toolbar {
+    width: 100%;
+  }
+}
+
+.toolbar p {
+  color: #244965;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
 .nav {
   width: 100%;
   height: 2.5rem;
@@ -313,13 +352,13 @@ span.nav-menu-item {
   }
 }
 
-.nav #nav-logo {
+.nav a #nav-logo {
   height: 2.3rem;
   margin: 0 1.5rem 0 1.5rem;
 }
 
 @media (min-device-width: 320px) and (max-device-width: 480px) {
-  .nav #nav-logo {
+  .nav a #nav-logo {
     height: 1.5rem;
   }
 }
@@ -904,7 +943,7 @@ span.nav-menu-item {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  min-height: 34rem;
+  min-height: 36rem;
 }
 
 @media (min-device-width: 320px) and (max-device-width: 480px) {
@@ -999,6 +1038,10 @@ span.nav-menu-item {
   }
 }
 
+.content.create-survey h1 {
+  text-align: center;
+}
+
 .content.create-survey .tile-container {
   border-top: none;
   background-color: transparent;
@@ -1078,6 +1121,55 @@ span.nav-menu-item {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+}
+
+.content.survey-details {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.content .toolbar {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.content .survey-details-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: center;
+      align-self: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.content .survey-details-content .stats {
+  background-color: #f8f8f8;
+  border: 2px solid #244965;
+  border-radius: 5px;
+  min-width: 20rem;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.content .survey-details-content .stats h2 {
+  text-align: center;
+  color: #244965;
+  margin-bottom: 1.5rem;
+}
+
+.content .survey-details-content .stats p {
+  color: #244965;
+  font-size: 1rem;
+  margin: 1.5rem 0rem 1.5rem 0rem;
+}
+
+.content .survey-details-content .stats span {
+  font-weight: bold;
 }
 
 .footer {
