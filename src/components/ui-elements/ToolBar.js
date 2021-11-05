@@ -1,7 +1,7 @@
 import React from 'react'
 
 const ToolBar = ({ actions }) => {
-    const links = actions.map(a => <p>{a}</p>)
+    const links = actions.map(a => <p key={a}>{a}</p>)
 
     return (
         <div className="toolbar">

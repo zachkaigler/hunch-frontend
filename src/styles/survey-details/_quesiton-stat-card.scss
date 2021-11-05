@@ -1,0 +1,31 @@
+@import '../utilities/variables';
+
+.question-stat-card {
+    background-color: $offwhite;
+    border: 2px solid $color-1;
+    border-radius: 5px;
+    width: 40rem;
+    min-height: 15rem;
+    padding: .5rem;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    @media (min-device-width: 320px) and (max-device-width: 480px) {
+        width: 90%;
+    }
+
+    p {
+        color: $color-1;
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .chart-container {
+        align-self: center;
+        margin: 1.5rem;
+        width: 100%;
+        height: 15rem;
+    }
+}

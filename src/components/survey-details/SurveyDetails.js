@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ToolBar from '../ui-elements/ToolBar'
+import QuestionStatCard from './QuestionStatCard'
 
 const SurveyDetails = () => {
     const [survey, setSurvey] = useState({})
@@ -7,11 +8,14 @@ const SurveyDetails = () => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
-        // Dev code. TODO: replace with fetch to survey and responses tables
+        // Dev code. TODO: replace with fetch to survey and responses tables. Make check that
+        // logged in user owns this survey
         setSurvey({
             id: "11821283-ff90-484d-886c-026250928790",
             userId: "8856c424-52c8-49d0-8c92-60d065b0a9e7",
             creationDate: "10/10/21",
+            deactivationDate: null,
+            active: true,
             type: "linear",
             name: "Quarter 4 Customer Satisfaction Survey",
             desc: "Please answer a few short questions about your experience with us this quarter.",
@@ -180,15 +184,33 @@ const SurveyDetails = () => {
         return responsesArr.filter(r => r.answers.length === surveyObj.questions.length).length / responsesArr.length * 100
     }
 
+    const calculateEngagementRate = (responsesArr, surveyObj) => {
+        if (surveyObj.active) {
+            return responsesArr.length / calculateDays(surveyObj.creationDate, new Date().toLocaleDateString()) * 100
+        } else {
+            return responsesArr.length / calculateDays(surveyObj.creationDate, surveyObj.deactivationDate) * 100
+        }
+    }
+
     if (!isLoaded) {
         return (
             <div className="main">
             <div className="content survey-details">
+                {/* TODO: update loading */}
                 <h1>Loading</h1>
             </div>
         </div>
         )
     } else {
+
+        const questionCards = survey.questions.map(q => {
+            return <QuestionStatCard
+                        key={q.id} 
+                        question={q}
+                        responses={responses}
+                  />
+        })
+
         return (
             <div className="main">
                 <div className="content survey-details">
@@ -199,15 +221,16 @@ const SurveyDetails = () => {
                     <div className="survey-details-content">
                         <div className="survey-details-col stats">
                             <h2>Survey Stats</h2>
+                            <p><span className="label">Status:</span> {survey.active ? "Active" : "Deactivated"}</p>
                             <p><span className="label">Creation date:</span> {survey.creationDate}</p>
-                            {/* TODO: fix date calculation */}
                             <p><span className="label">Days active:</span> {calculateDays(survey.creationDate, new Date().toLocaleDateString())}</p>
                             <p><span className="label">Total questions:</span> {survey.questions.length}</p>
                             <p><span className="label">Responses collected:</span> {responses.length}</p>
-                            <p><span className="label">Completion rate:</span> {calculateCompletionRate(responses, survey)}%</p>
+                            <p><span className="label">Completion rate:</span> {Math.round(calculateCompletionRate(responses, survey))}%</p>
+                            <p><span className="label">Engagement rate:</span> {Math.round(calculateEngagementRate(responses, survey))}%</p>
                         </div>
-                        <div className="survey-details-col">
-                            <p>Answers</p>
+                        <div className="survey-details-col questions">
+                            {questionCards}
                         </div>
                     </div>
                 </div>
