@@ -3,6 +3,7 @@ import ToolBar from '../ui-elements/ToolBar'
 import QuestionStatCard from './QuestionStatCard'
 
 const SurveyDetails = () => {
+    // TODO: check mobile styling, fix charts, toolbar functionality
     const [survey, setSurvey] = useState({})
     const [responses, setResponses] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
@@ -177,7 +178,7 @@ const SurveyDetails = () => {
         const date1 = new Date(dateStr1)
         const date2 = new Date(dateStr2)
         const diffInTime = date2.getTime() - date1.getTime()
-        return diffInTime / (1000 * 3600 * 24)
+        return parseInt(diffInTime / (1000 * 3600 * 24))
     }
 
     const calculateCompletionRate = (responsesArr, surveyObj) => {

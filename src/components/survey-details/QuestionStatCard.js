@@ -18,7 +18,7 @@ const QuestionStatCard = ({ question, responses }) => {
         if (data.value === 0) {
             return null
         } else {
-            return `${data.title}: ${Math.round(data.percentage)}%`
+            return `${Math.round(data.percentage)}%`
         }
     }
 
