@@ -9,7 +9,7 @@ import SurveyDetails from "./survey-details/SurveyDetails";
 function App() {
   // Set to null to go to landing page
   // TODO: Replace with actual user functionality
-  let user = {}
+  let user = {};
 
   return (
     <div className="App">
